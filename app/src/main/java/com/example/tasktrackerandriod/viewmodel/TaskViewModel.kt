@@ -41,8 +41,12 @@ class TaskViewModel : ViewModel() {
         }
     }*/
 
+    fun loadTasks(): List<Task> {
+        return _tasks
+    }
+
     fun editTask(id: Int, newTitle: String) {
-        val task = tasks.find { it.id == id }
+        val task = _tasks.find { it.id == id }
         if (task != null) {
             task.title = newTitle
         }

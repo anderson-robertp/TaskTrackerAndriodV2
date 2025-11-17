@@ -15,13 +15,16 @@ fun AppNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = "Routes.TASK_LIST"
+        startDestination = Routes.TASK_LIST
     ) {
         composable(Routes.TASK_LIST) {
             TaskScreen(
                 viewModel = viewModel,
                 editTask = { taskId ->
                     navController.navigate("task_edit/$taskId")
+                },
+                deleteTask = { taskId ->
+                    viewModel.deleteTask(taskId)
                 }
             )
         }
@@ -32,8 +35,10 @@ fun AppNavHost(
             TaskEditScreen(
                 viewModel = viewModel,
                 taskId = id,
+                navController = navController,
                 onNavigateBack = { navController.popBackStack() }
             )
         }
     }
 }
+

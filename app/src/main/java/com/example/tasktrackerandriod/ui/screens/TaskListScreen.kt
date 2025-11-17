@@ -48,7 +48,8 @@ fun TaskListScreen(viewModel: TaskViewModel) {
                 TaskItem(
                     task = task,
                     onToggle = { viewModel.toggleTaskComplete(task.id) },
-                    onClickEdit = { /* Nav later */ }
+                    onClickEdit = { viewModel.editTask(task.id, newTaskTitle) },
+                    onClickDelete = { viewModel.deleteTask(task.id) }
                 )
             }
         }

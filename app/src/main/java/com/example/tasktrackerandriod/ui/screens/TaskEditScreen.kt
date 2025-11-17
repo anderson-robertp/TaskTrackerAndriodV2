@@ -18,7 +18,7 @@ fun TaskEditScreen(
     taskId: Int,
     navController: NavController,
     viewModel: TaskViewModel,
-    onBack: () -> Unit,
+    onNavigateBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     // Fetch the task details based on the taskId
@@ -38,7 +38,7 @@ fun TaskEditScreen(
             TopAppBar(
                 title = { Text("Edit Task") },
                 navigationIcon = {
-                    IconButton(onClick = onBack) {
+                    IconButton(onClick = onNavigateBack) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
                     }
                 }
@@ -80,7 +80,7 @@ fun TaskEditScreen(
                     viewModel.editTask(taskId, updatedTitle)
                     if (updatedCompleted != task.isCompleted)
                         viewModel.toggleTaskComplete(taskId)
-                    onBack()
+                    onNavigateBack()
                 },
                 modifier = Modifier.fillMaxWidth()
             ) {
@@ -95,7 +95,7 @@ fun TaskEditScreen(
                 ),
                 onClick = {
                     viewModel.deleteTask(taskId)
-                    onBack()
+                    onNavigateBack()
                 },
                 modifier = Modifier.fillMaxWidth()
             ) {

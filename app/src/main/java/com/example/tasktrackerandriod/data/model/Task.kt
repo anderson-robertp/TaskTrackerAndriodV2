@@ -10,5 +10,5 @@ data class Task(
     var isCompleted: Boolean = false
 ){
     // Wrap isCompleted in Compose state for automatic recomposition
-    var completed by mutableStateOf(isCompleted)
+    var isChecked by mutableStateOf(isCompleted)
 }

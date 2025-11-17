@@ -14,9 +14,16 @@ import com.example.tasktrackerandriod.viewmodel.TaskViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TaskScreen(viewModel: TaskViewModel, modifier: Modifier) {
+fun TaskScreen(
+    viewModel: TaskViewModel,
+    editTask: (int: Int) -> Unit,
+    deleteTask: (int: Int) -> Unit,
+    modifier: Modifier = Modifier
+    ) {
     val tasks = viewModel.tasks
     var newTaskTitle by remember { mutableStateOf("") }
+
+    val updateTaskTitle: (String) -> Unit = { newTaskTitle = it }
 
     val onAddTaskClick: () -> Unit = {
         if (newTaskTitle.isNotEmpty()) {
@@ -58,8 +65,8 @@ fun TaskScreen(viewModel: TaskViewModel, modifier: Modifier) {
                     TaskItem(
                         task = task,
                         onToggle = { viewModel.toggleTaskComplete(task.id) },
-                        onClickEdit = { viewModel.editTask(task.id, newTaskTitle) },
-                        onClickDelete = { viewModel.deleteTask(task.id) }
+                        onClickEdit = { editTask(task.id) },
+                        onClickDelete = { deleteTask(task.id) }
                     )
                 }
             }
