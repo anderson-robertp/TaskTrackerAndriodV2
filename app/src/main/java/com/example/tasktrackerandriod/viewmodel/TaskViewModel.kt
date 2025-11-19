@@ -1,17 +1,16 @@
 package com.example.tasktrackerandriod.viewmodel
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
 import androidx.lifecycle.viewModelScope
 import com.example.tasktrackerandriod.data.TaskDataStore
 import com.example.tasktrackerandriod.data.model.Task
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import android.content.Context
-import com.example.tasktrackerandriod.data.protoTaskDataStore
+import androidx.lifecycle.AndroidViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 
-class TaskViewModel(context: Context) : ViewModel() {
-     private val dataStore: TaskDataStore = context.protoTaskDataStore
+class TaskViewModel(app: Application) : AndroidViewModel(app) {
+     private val dataStore = TaskDataStore(app)
 
     private val _tasks = MutableStateFlow<List<Task>>(emptyList())
 
