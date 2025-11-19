@@ -3,7 +3,6 @@ package com.example.tasktrackerandriod.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tasktrackerandriod.data.TaskDataStore
-import com.example.tasktrackerandriod.data.taskDataStore
 import com.example.tasktrackerandriod.data.model.Task
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch

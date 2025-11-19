@@ -8,7 +8,6 @@ import androidx.compose.ui.unit.dp
 import com.example.tasktrackerandriod.viewmodel.TaskViewModel
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.navigation.NavController
 
 

@@ -9,8 +9,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.tasktrackerandriod.viewmodel.TaskViewModel
-import com.example.tasktrackerandriod.data.model.Task
-import com.example.tasktrackerandriod.ui.screens.TaskItem
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

@@ -5,7 +5,6 @@ import androidx.datastore.core.Serializer
 import androidx.datastore.dataStore
 import android.content.Context
 import com.example.tasktrackerandriod.TaskList
-import com.example.tasktrackerandriod.TaskProto
 import java.io.InputStream
 import java.io.OutputStream
 
