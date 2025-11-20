@@ -1,5 +1,6 @@
 package com.example.tasktrackerandriod.viewmodel
 
+// Imports
 import android.app.Application
 import androidx.lifecycle.viewModelScope
 import com.example.tasktrackerandriod.data.TaskDataStore
@@ -10,14 +11,13 @@ import androidx.lifecycle.AndroidViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 
 class TaskViewModel(app: Application) : AndroidViewModel(app) {
+    // Private properties
      private val dataStore = TaskDataStore(app)
-
     private val _tasks = MutableStateFlow<List<Task>>(emptyList())
-
     val tasks: StateFlow<List<Task>> = _tasks
-
     private var nextId: Int = 1
 
+    // Initialize the ViewModel
     init {
         viewModelScope.launch {
             dataStore.tasksFlow.collect { loaded ->
@@ -29,6 +29,7 @@ class TaskViewModel(app: Application) : AndroidViewModel(app) {
 
     }
 
+    // Helper function to update tasks
     private fun updateTasks(tasks: List<Task>) {
         _tasks.value = tasks
         viewModelScope.launch {
@@ -36,15 +37,15 @@ class TaskViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
-
-
-
+    // Public functions
+    // Add a new task
     fun addTask(title: String) {
         val newId = (tasks.value.maxOfOrNull { it.id } ?: 0) + 1
         val newTask = Task(id = newId, title = title)
         updateTasks(tasks.value + newTask)
     }
 
+    // Toggle the completion status of a task
     fun toggleTaskComplete(id: Int) {
         val updated = tasks.value.map {
             if (it.id == id) it.copy(isCompleted = !it.isCompleted)
@@ -53,6 +54,7 @@ class TaskViewModel(app: Application) : AndroidViewModel(app) {
         updateTasks(updated)
     }
 
+    // Edit the title of a task
     fun editTask(id: Int, newTitle: String) {
         // FIX 1.1: Use a different variable name ('updatedTasks')
         val updatedTasks = tasks.value.map {
@@ -63,6 +65,7 @@ class TaskViewModel(app: Application) : AndroidViewModel(app) {
         updateTasks(updatedTasks)
     }
 
+    // Delete a task
     fun deleteTask(id: Int) {
         val remainingTasks = tasks.value.filterNot { it.id == id }
         updateTasks(remainingTasks)

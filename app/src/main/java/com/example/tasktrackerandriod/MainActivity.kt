@@ -19,20 +19,39 @@ import com.example.tasktrackerandriod.viewmodel.TaskViewModel
 import androidx.navigation.compose.rememberNavController
 import com.example.tasktrackerandriod.navigation.AppNavHost
 
+/**
+ * The main and only activity in this single-activity architecture application.
+ * It serves as the entry point for the app and hosts all the Jetpack Compose UI content.
+ */
 class MainActivity : ComponentActivity() {
 
-    // Activity-scoped ViewModel
+    /**
+     * Lazily initializes the [TaskViewModel].
+     * The `by viewModels()` delegate ensures that the ViewModel is scoped to this activity,
+     * meaning it survives configuration changes (like screen rotation) and is shared
+     * across all composables hosted by this activity.
+     */
     private val taskViewModel: TaskViewModel by viewModels()
 
+    /**
+     * The entry point method called when the activity is first created.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Enables edge-to-edge layout for the activity.
         enableEdgeToEdge()
+        // Sets the content of the activity using Jetpack Compose.
         setContent {
+            // The main theme for the app.
             TaskTrackerAndriodV2Theme {
+                // A surface container using the 'background' color from the theme.
                 Surface(
                         modifier = Modifier.fillMaxSize(),
                     ) {
+                        // creates a [Scaffold] with a [TaskScreen] as its content.
                         val navController = rememberNavController()
+                    // Sets up the application's navigation graph, passing the NavController
+                    // and the shared ViewModel to it.
                         AppNavHost(
                             navController = navController,
                             viewModel = taskViewModel
@@ -43,7 +62,10 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-
+/**
+ * A simple composable function for demonstration and preview purposes.
+ * It displays a greeting text.
+ */
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(
@@ -51,7 +73,10 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
         modifier = modifier
     )
 }
-
+/**
+ * A preview composable that allows developers to see how the `Greeting` composable
+ * looks within the Android Studio editor without running the app on a device.
+ */
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {

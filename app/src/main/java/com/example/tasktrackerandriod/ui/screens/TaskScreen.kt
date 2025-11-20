@@ -12,6 +12,7 @@ import com.example.tasktrackerandriod.viewmodel.TaskViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
+// TaskScreen(viewModel: TaskViewModel)
 fun TaskScreen(
     viewModel: TaskViewModel,
     editTask: (int: Int) -> Unit,
@@ -29,6 +30,7 @@ fun TaskScreen(
     }
     val snackbarHostState = remember { SnackbarHostState() }
 
+    // Build the Task display screen
     Scaffold(
         topBar = {
             TopAppBar(title = { Text("Task Tracker") })
@@ -42,11 +44,11 @@ fun TaskScreen(
             }
         }
     ) { padding ->
-        Column(
+        Column( // Column for the main content
             modifier = Modifier
                 .padding(padding)
                 .fillMaxSize()
-        ) {
+        ) { // Row for input and button
             OutlinedTextField(
                 value = newTaskTitle,
                 onValueChange = { newTaskTitle = it },
@@ -55,7 +57,7 @@ fun TaskScreen(
                     .fillMaxWidth()
                     .padding(8.dp)
             )
-
+                // LazyColumn to display tasks
             LazyColumn(modifier = Modifier.fillMaxSize()) {
                 items(tasks) { task ->
                     TaskItem(
@@ -71,8 +73,9 @@ fun TaskScreen(
 }
 
 
-
+//
 @Composable
+// function to display task
 fun TaskItem(task: Task) {
     Row(
         modifier = Modifier
@@ -88,6 +91,7 @@ fun TaskItem(task: Task) {
     }
 }
 
+// Private fun to complete task
 private fun TaskViewModel.toggleCompleted(task: Task) {
     toggleTaskComplete(task.id)
 }
